@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hFe-g7-fYc">
+                                <rect key="frame" x="30" y="175" width="315" height="317"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yj3-eL-MyG">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Pick" id="R98-PC-4GZ">
+                                        <connections>
+                                            <action selector="PickAnImage:" destination="BYZ-38-t0r" id="kkj-NG-BEZ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="camera" catalog="system" id="Gt5-jU-5SA">
+                                        <connections>
+                                            <action selector="PickAnImageFromCamera:" destination="BYZ-38-t0r" id="Kap-tq-0fj"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="KAi-jr-5Ht">
+                                <rect key="frame" x="30" y="473.5" width="315" height="18.5"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="bDI-65-hnW">
+                                <rect key="frame" x="30" y="179" width="315" height="18.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diT-K1-PQC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="MemeMe V1.0" id="5gO-XD-gPx">
+                                        <barButtonItem key="leftBarButtonItem" image="square.and.arrow.up" catalog="system" id="Jxb-nX-Sei">
+                                            <connections>
+                                                <action selector="shareButton:" destination="BYZ-38-t0r" id="uK5-VZ-BwX"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="Agz-MX-nmO">
+                                            <connections>
+                                                <action selector="cancelButton:" destination="BYZ-38-t0r" id="4Ad-xM-Z7R"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <constraints>
+                            <constraint firstItem="Yj3-eL-MyG" firstAttribute="top" secondItem="hFe-g7-fYc" secondAttribute="bottom" constant="131" id="3H7-ak-77v">
+                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
+                            </constraint>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hFe-g7-fYc" secondAttribute="trailing" constant="30" id="AKL-tq-ojT"/>
+                            <constraint firstItem="hFe-g7-fYc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="C4d-q0-Ten"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KAi-jr-5Ht" secondAttribute="trailing" constant="30" id="EiX-i0-DqF"/>
+                            <constraint firstItem="diT-K1-PQC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ErC-vc-zTI"/>
+                            <constraint firstItem="KAi-jr-5Ht" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="HBJ-Yb-4md"/>
+                            <constraint firstItem="diT-K1-PQC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="JmC-ft-RKF"/>
+                            <constraint firstItem="hFe-g7-fYc" firstAttribute="top" secondItem="diT-K1-PQC" secondAttribute="bottom" constant="131" id="L0K-ZD-8eR">
+                                <variation key="heightClass=compact-widthClass=compact" constant="10"/>
+                            </constraint>
+                            <constraint firstItem="Yj3-eL-MyG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OsJ-NX-58g"/>
+                            <constraint firstItem="Yj3-eL-MyG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="QIR-XB-0lw"/>
+                            <constraint firstItem="bDI-65-hnW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="TGW-eY-yaI"/>
+                            <constraint firstItem="Yj3-eL-MyG" firstAttribute="top" secondItem="KAi-jr-5Ht" secondAttribute="bottom" constant="131" id="TkN-el-88d">
+                                <variation key="heightClass=compact-widthClass=compact" constant="13"/>
+                            </constraint>
+                            <constraint firstItem="Yj3-eL-MyG" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="diS-dB-hSS"/>
+                            <constraint firstItem="bDI-65-hnW" firstAttribute="top" secondItem="diT-K1-PQC" secondAttribute="bottom" constant="135" id="wXx-a2-BdX">
+                                <variation key="heightClass=compact-widthClass=compact" constant="13"/>
+                            </constraint>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bDI-65-hnW" secondAttribute="trailing" constant="30" id="wbx-5a-g2P"/>
+                            <constraint firstItem="diT-K1-PQC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="wgy-3Y-HUI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="PickerImageView" destination="hFe-g7-fYc" id="1vK-1a-W9A"/>
+                        <outlet property="bottomText" destination="KAi-jr-5Ht" id="rBO-qO-tJk"/>
+                        <outlet property="cameraButton" destination="Gt5-jU-5SA" id="QbD-un-BQ3"/>
+                        <outlet property="cancel" destination="Agz-MX-nmO" id="Kbi-gV-34r"/>
+                        <outlet property="naviBar" destination="diT-K1-PQC" id="S0N-20-V5d"/>
+                        <outlet property="share" destination="Jxb-nX-Sei" id="DY7-hd-wUr"/>
+                        <outlet property="tab" destination="Yj3-eL-MyG" id="CD6-f4-krh"/>
+                        <outlet property="topText" destination="bDI-65-hnW" id="8mA-gM-wZe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138.98050974512745" y="138.40000000000001"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera" catalog="system" width="128" height="96"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+    </resources>
+</document>
