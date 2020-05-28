@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CreateMeme.swift
 //  MemeMe
 //
 //  Created by nF ™ on 12/05/2020.
@@ -7,9 +7,12 @@
 //
 
 import UIKit
+protocol CreateMemeDelegate : class{
+    func didAddmeme()
+}
+class CreateMeme: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate , UITextFieldDelegate{
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate , UITextFieldDelegate{
-
+    weak var del : CreateMemeDelegate?
     
     // MARK: OUTLETS
     @IBOutlet weak var tab: UIToolbar!
@@ -21,6 +24,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     @IBOutlet weak var share: UIBarButtonItem!
     @IBOutlet weak var naviBar: UINavigationBar!
     
+    
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor : UIColor.white ,
@@ -31,18 +35,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         
         // MARK: SETUP TEXTFIELDS
-        topText.defaultTextAttributes = memeTextAttributes
-        bottomText.defaultTextAttributes = memeTextAttributes
-        topText.textAlignment = .center
-        bottomText.textAlignment = .center
-        topText.delegate = self
-        bottomText.delegate = self
+        setupTextField(tf: topText, text: "TOP")
+        setupTextField(tf: bottomText, text: "BOTTOM")
         
         // MARK: CHECK IF CAMERA AVAILABLE
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -57,23 +56,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     
     // MARK: ACTIONS
     @IBAction func PickAnImage(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: nil)
+        chooseImageFromCameraOrPhoto(source: .photoLibrary)
     }
     @IBAction func PickAnImageFromCamera(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
+        chooseImageFromCameraOrPhoto(source: .camera)
     }
     @IBAction func shareButton(_ sender: Any) {
         save()
     }
     @IBAction func cancelButton(_ sender: Any) {
         PickerImageView.image = nil
-        topText.text = "TOP"
-        bottomText.text = "BOTTOM"
+        setupTextField(tf: topText, text: "TOP")
+        setupTextField(tf: bottomText, text: "BOTTOM")
+        self.del?.didAddmeme()
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -87,6 +83,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         dismiss(animated: true, completion: nil)
     }
     
+    func chooseImageFromCameraOrPhoto(source: UIImagePickerController.SourceType) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.sourceType = source
+        present(pickerController, animated: true, completion: nil)
+    }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
     {
@@ -141,10 +144,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         if PickerImageView.image != nil {
             let memedImage = generateMemedImage()
             let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: PickerImageView.image!, memedImage: memedImage)
-            let Activity = UIActivityViewController(activityItems: [meme.memedImage!], applicationActivities: nil)
-            DispatchQueue.main.async {
-                self.present(Activity,animated: true)
+            let activityController = UIActivityViewController(activityItems: [meme.memedImage!], applicationActivities: nil)
+            activityController.completionWithItemsHandler = { activity, completed, items, error in
+                if completed {
+                    let object = UIApplication.shared.delegate
+                    let appDelegate = object as! AppDelegate
+                    appDelegate.memes.append(meme)
+                    self.del?.didAddmeme()
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
+           
+            present(activityController, animated: true, completion: nil)
         }
 
     }
@@ -164,6 +175,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         tab.isHidden = false
         naviBar.isHidden = false
         return memedImage
+    }
+    
+    
+    // MARK: TEXTFIELD SETUP
+    
+    func setupTextField(tf: UITextField, text: String) {
+        tf.defaultTextAttributes = [
+            NSAttributedString.Key.strokeColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor : UIColor.white ,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSAttributedString.Key.strokeWidth:  -2
+        ]
+        tf.textColor = UIColor.white
+        tf.tintColor = UIColor.white
+        tf.textAlignment = .center
+        tf.text = text
+        tf.delegate = self
     }
     
 }

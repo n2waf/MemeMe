@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>to save the meme in your camera roll</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We want to use your album to take a photo</string>
-	<key>NSCameraUsageDescription</key>
-	<string>We Want to use your camera to take a Photo</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -21,11 +15,17 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>We Want to use your camera to take a Photo</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>to save the meme in your camera roll</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We want to use your album to take a photo</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
